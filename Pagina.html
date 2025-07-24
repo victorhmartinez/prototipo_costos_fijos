@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Simulador de Costos Fijos</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="bg-gradient-to-br from-gray-100 to-gray-300 min-h-screen p-4">
+  <div class="max-w-4xl mx-auto">
+    <!-- Encabezado -->
+    <header class="text-center py-8">
+      <h1 class="text-3xl md:text-4xl font-bold text-gray-800 mb-2">Simulador de Costos Fijos</h1>
+      <p class="text-gray-600 max-w-2xl mx-auto">Calcula y analiza los costos de tu negocio para tomar decisiones informadas</p>
+    </header>
+
+    <!-- Contenedor principal -->
+    <div class="bg-white rounded-2xl shadow-xl overflow-hidden">
+      
+      <!-- Sección: Datos del negocio -->
+      <section class="p-6 bg-blue-50 border-l-4 border-blue-500">
+        <h2 class="text-xl font-bold text-blue-800 flex items-center mb-4">
+          <i class="fas fa-building mr-2 text-2xl"></i> Información del negocio
+        </h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <input type="number" placeholder="Número de empleados" class="input-style bg-blue-50 border-blue-200 focus:ring-blue-500 focus:border-blue-500" />
+          <input type="text" placeholder="Ubicación" class="input-style bg-blue-50 border-blue-200 focus:ring-blue-500 focus:border-blue-500" />
+          <input type="text" placeholder="Año de inicio" class="input-style bg-blue-50 border-blue-200 focus:ring-blue-500 focus:border-blue-500 md:col-span-2" />
+        </div>
+      </section>
+
+      <!-- Sección: Costos fijos -->
+      <section class="p-6 bg-red-50 border-l-4 border-red-500">
+        <h2 class="text-xl font-bold text-red-700 flex items-center mb-4">
+          <i class="fas fa-money-bill-wave mr-2 text-2xl"></i> Costos fijos principales
+        </h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <input type="number" placeholder="Alquiler mensual ($)" class="input-style bg-red-50 border-red-200 focus:ring-red-500 focus:border-red-500" />
+          <input type="number" placeholder="Salarios y beneficios ($)" class="input-style bg-red-50 border-red-200 focus:ring-red-500 focus:border-red-500" />
+          <input type="number" placeholder="Servicios básicos ($)" class="input-style bg-red-50 border-red-200 focus:ring-red-500 focus:border-red-500" />
+          <input type="number" placeholder="Seguros ($)" class="input-style bg-red-50 border-red-200 focus:ring-red-500 focus:border-red-500" />
+          <input type="number" placeholder="Licencias / permisos ($)" class="input-style bg-red-50 border-red-200 focus:ring-red-500 focus:border-red-500" />
+          <input type="number" placeholder="Insumos mensuales ($)" class="input-style bg-red-50 border-red-200 focus:ring-red-500 focus:border-red-500" />
+        </div>
+      </section>
+
+      <!-- Sección: Costos adicionales -->
+      <section class="p-6 bg-teal-50 border-l-4 border-teal-500">
+        <h2 class="text-xl font-bold text-teal-700 flex items-center mb-4">
+          <i class="fas fa-tools mr-2 text-2xl"></i> Costos adicionales
+        </h2>
+        <div class="space-y-4">
+          <input type="number" placeholder="Mantenimiento / comunidad ($)" class="input-style w-full bg-teal-50 border-teal-200 focus:ring-teal-500 focus:border-teal-500" />
+          <input type="number" placeholder="Maquinaria / mantenimiento ($)" class="input-style w-full bg-teal-50 border-teal-200 focus:ring-teal-500 focus:border-teal-500" />
+        </div>
+      </section>
+
+      <!-- Sección: Variabilidad -->
+      <section class="p-6 bg-orange-50 border-l-4 border-orange-500">
+        <h2 class="text-xl font-bold text-orange-600 flex items-center mb-4">
+          <i class="fas fa-exclamation-triangle mr-2 text-2xl"></i> Variabilidad y control
+        </h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <input type="text" placeholder="¿Cuánto han variado los costos?" class="input-style bg-orange-50 border-orange-200 focus:ring-orange-500 focus:border-orange-500" />
+          <input type="text" placeholder="¿Qué se puede reducir?" class="input-style bg-orange-50 border-orange-200 focus:ring-orange-500 focus:border-orange-500" />
+        </div>
+      </section>
+
+      <!-- Sección: Ingresos -->
+      <section class="p-6 bg-gray-50 border-l-4 border-gray-500">
+        <h2 class="text-xl font-bold text-gray-800 flex items-center mb-4">
+          <i class="fas fa-chart-line mr-2 text-2xl"></i> Ingresos y proyecciones
+        </h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <input type="number" placeholder="Ingreso mensual promedio ($)" class="input-style bg-gray-50 border-gray-200 focus:ring-gray-500 focus:border-gray-500" />
+          <input type="number" placeholder="Capacidad máxima (clientes/ventas)" class="input-style bg-gray-50 border-gray-200 focus:ring-gray-500 focus:border-gray-500" />
+          <input type="text" placeholder="Metas de rentabilidad" class="input-style md:col-span-2 bg-gray-50 border-gray-200 focus:ring-gray-500 focus:border-gray-500" />
+        </div>
+      </section>
+
+      <!-- Sección: Retroalimentación / Resultados (oculta inicialmente) -->
+      <section id="resultados" class="p-6 bg-purple-50 border-l-4 border-purple-500 hidden transition-all duration-500 ease-in-out">
+        <h2 class="text-xl font-bold text-purple-800 flex items-center mb-4">
+          <i class="fas fa-chart-pie mr-2 text-2xl"></i> Análisis y Resultados
+        </h2>
+        <div class="bg-white border-2 border-dashed border-purple-300 rounded-xl p-4 min-h-[120px] shadow-inner">
+          <div id="contenido-resultados" class="text-gray-700">
+            <!-- Los resultados se insertarán aquí mediante JavaScript -->
+          </div>
+        </div>
+      </section>
+
+      <!-- Botón -->
+      <div class="text-center p-6 bg-gradient-to-r from-green-500 to-emerald-600">
+        <button id="calcular-btn" class="bg-gradient-to-r from-green-600 to-emerald-700 text-white font-bold text-lg px-8 py-3 rounded-full shadow-lg hover:from-green-700 hover:to-emerald-800 transition transform hover:scale-105 duration-300 ease-in-out">
+          <i class="fas fa-calculator mr-2"></i> Calcular y Simular
+        </button>
+      </div>
+    </div>
+
+    <!-- Pie de página -->
+    <footer class="text-center py-6 text-gray-600">
+      <p>© 2023 Simulador de Costos Fijos - Todos los derechos reservados</p>
+    </footer>
+  </div>
+
+  <style>
+    .input-style {
+      @apply border-2 rounded-xl px-4 py-3 w-full focus:outline-none focus:ring-2 focus:ring-opacity-50 transition duration-200 ease-in-out;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+    }
+    .input-style:focus {
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+  </style>
+
+  <script>
+    document.getElementById('calcular-btn').addEventListener('click', function() {
+      // Mostrar la sección de resultados
+      const resultadosSection = document.getElementById('resultados');
+      resultadosSection.classList.remove('hidden');
+      
+      // Obtener valores de los inputs
+      const empleados = document.querySelector('input[placeholder="Número de empleados"]').value || 0;
+      const alquiler = document.querySelector('input[placeholder="Alquiler mensual ($)"]').value || 0;
+      const salarios = document.querySelector('input[placeholder="Salarios y beneficios ($)"]').value || 0;
+      const servicios = document.querySelector('input[placeholder="Servicios básicos ($)"]').value || 0;
+      const seguros = document.querySelector('input[placeholder="Seguros ($)"]').value || 0;
+      const licencias = document.querySelector('input[placeholder="Licencias / permisos ($)"]').value || 0;
+      const insumos = document.querySelector('input[placeholder="Insumos mensuales ($)"]').value || 0;
+      const mantenimiento = document.querySelector('input[placeholder="Mantenimiento / comunidad ($)"]').value || 0;
+      const maquinaria = document.querySelector('input[placeholder="Maquinaria / mantenimiento ($)"]').value || 0;
+      const ingresoMensual = document.querySelector('input[placeholder="Ingreso mensual promedio ($)"]').value || 0;
+      
+      // Calcular costos totales
+      const costosFijos = parseFloat(alquiler) + parseFloat(salarios) + parseFloat(servicios) + 
+                         parseFloat(seguros) + parseFloat(licencias) + parseFloat(insumos);
+      const costosAdicionales = parseFloat(mantenimiento) + parseFloat(maquinaria);
+      const costosTotales = costosFijos + costosAdicionales;
+      const utilidadMensual = parseFloat(ingresoMensual) - costosTotales;
+      
+      // Generar contenido de resultados
+      const contenidoResultados = `
+        <div class="space-y-4">
+          <h3 class="font-bold text-lg text-purple-700 border-b pb-2">Resumen Financiero Mensual</h3>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div class="bg-blue-50 p-4 rounded-lg border border-blue-200 shadow-sm">
+              <p class="text-sm text-blue-600 flex items-center"><i class="fas fa-home mr-2"></i> Costos Fijos</p>
+              <p class="font-bold text-blue-800 text-xl">$${costosFijos.toLocaleString()}</p>
+            </div>
+            <div class="bg-teal-50 p-4 rounded-lg border border-teal-200 shadow-sm">
+              <p class="text-sm text-teal-600 flex items-center"><i class="fas fa-wrench mr-2"></i> Costos Adicionales</p>
+              <p class="font-bold text-teal-800 text-xl">$${costosAdicionales.toLocaleString()}</p>
+            </div>
+            <div class="bg-red-50 p-4 rounded-lg border border-red-200 shadow-sm">
+              <p class="text-sm text-red-600 flex items-center"><i class="fas fa-receipt mr-2"></i> Costos Totales</p>
+              <p class="font-bold text-red-800 text-xl">$${costosTotales.toLocaleString()}</p>
+            </div>
+            <div class="bg-green-50 p-4 rounded-lg border border-green-200 shadow-sm">
+              <p class="text-sm text-green-600 flex items-center"><i class="fas fa-piggy-bank mr-2"></i> Utilidad Estimada</p>
+              <p class="font-bold text-green-800 text-xl">$${utilidadMensual.toLocaleString()}</p>
+            </div>
+          </div>
+          
+          <div class="mt-4 bg-yellow-50 p-4 rounded-lg border border-yellow-200 shadow-sm">
+            <h4 class="font-bold text-yellow-700 mb-2 flex items-center"><i class="fas fa-lightbulb mr-2"></i> Análisis</h4>
+            <p class="text-yellow-800 mb-2">
+              ${utilidadMensual > 0 
+                ? `<span class="text-green-600 font-semibold"><i class="fas fa-check-circle mr-1"></i> ¡Excelente!</span> El negocio es rentable con $${utilidadMensual.toLocaleString()} de utilidad mensual.` 
+                : `<span class="text-red-600 font-semibold"><i class="fas fa-times-circle mr-1"></i> ¡Cuidado!</span> El negocio tiene pérdidas de $${Math.abs(utilidadMensual).toLocaleString()} mensuales.`}
+            </p>
+            ${empleados > 0 
+              ? `<p class="text-yellow-800">
+                  <i class="fas fa-users mr-1"></i> Costo promedio por empleado: <span class="font-semibold">$${(costosTotales / empleados).toLocaleString(undefined, {maximumFractionDigits: 2})}</span> mensual.
+                </p>` 
+              : ''}
+          </div>
+          
+          <div class="bg-indigo-50 p-4 rounded-lg border border-indigo-200 shadow-sm">
+            <h4 class="font-bold text-indigo-700 mb-2 flex items-center"><i class="fas fa-bullseye mr-2"></i> Proyecciones</h4>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
+              <div class="text-center">
+                <p class="text-indigo-600 text-sm">Trimestral</p>
+                <p class="font-bold text-indigo-800">$${(utilidadMensual * 3).toLocaleString()}</p>
+              </div>
+              <div class="text-center">
+                <p class="text-indigo-600 text-sm">Semestral</p>
+                <p class="font-bold text-indigo-800">$${(utilidadMensual * 6).toLocaleString()}</p>
+              </div>
+              <div class="text-center">
+                <p class="text-indigo-600 text-sm">Anual</p>
+                <p class="font-bold text-indigo-800">$${(utilidadMensual * 12).toLocaleString()}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      `;
+      
+      // Insertar contenido en la sección de resultados
+      document.getElementById('contenido-resultados').innerHTML = contenidoResultados;
+      
+      // Desplazar la vista hacia la sección de resultados
+      resultadosSection.scrollIntoView({ behavior: 'smooth' });
+    });
+  </script>
+</body>
+</html>
