@@ -1,443 +1,572 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Simulador de Costos Fijos</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Simulador de Cafetería</title>
   <script src="https://cdn.tailwindcss.com"></script>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-</head>
-<body class="bg-gradient-to-br from-gray-100 to-gray-300 min-h-screen p-4">
-  <div class="max-w-4xl mx-auto">
-    <!-- Encabezado -->
-    <header class="text-center py-8">
-      <h1 class="text-3xl md:text-4xl font-bold text-gray-800 mb-2">Simulador de Costos Fijos</h1>
-      <p class="text-gray-600 max-w-2xl mx-auto">Calcula y analiza los costos de tu negocio para tomar decisiones informadas</p>
-    </header>
-
-    <!-- Contenedor principal -->
-    <div class="bg-white rounded-2xl shadow-xl overflow-hidden">
-      
-      <!-- Sección: Datos del negocio -->
-      <section class="p-6 bg-blue-50 border-l-4 border-blue-500">
-        <h2 class="text-xl font-bold text-blue-800 flex items-center mb-4">
-          <i class="fas fa-building mr-2 text-2xl"></i> Información del negocio
-        </h2>
-        <div id="datos-negocio-container" class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
-          <div class="dato-negocio-item flex gap-2">
-            <input type="text" placeholder="Nombre del dato" class="input-style bg-blue-50 border-blue-200 focus:ring-blue-500 focus:border-blue-500 flex-1" />
-            <input type="text" placeholder="Valor" class="input-style bg-blue-50 border-blue-200 focus:ring-blue-500 focus:border-blue-500 flex-1" />
-          </div>
-        </div>
-        <button id="agregar-dato-negocio" class="bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded-lg flex items-center transition">
-          <i class="fas fa-plus mr-2"></i> Agregar dato
-        </button>
-      </section>
-
-      <!-- Sección: Costos fijos -->
-      <section class="p-6 bg-red-50 border-l-4 border-red-500">
-        <h2 class="text-xl font-bold text-red-700 flex items-center mb-4">
-          <i class="fas fa-money-bill-wave mr-2 text-2xl"></i> Costos fijos principales
-        </h2>
-        <div id="costos-fijos-container" class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
-          <div class="costo-fijo-item flex gap-2">
-            <input type="text" placeholder="Nombre del costo" class="input-style bg-red-50 border-red-200 focus:ring-red-500 focus:border-red-500 flex-1" />
-            <input type="number" placeholder="Monto ($)" class="input-style bg-red-50 border-red-200 focus:ring-red-500 focus:border-red-500 w-32" />
-          </div>
-        </div>
-        <button id="agregar-costo-fijo" class="bg-red-600 hover:bg-red-700 text-white font-medium py-2 px-4 rounded-lg flex items-center transition">
-          <i class="fas fa-plus mr-2"></i> Agregar costo fijo
-        </button>
-      </section>
-
-      <!-- Sección: Costos adicionales -->
-      <section class="p-6 bg-teal-50 border-l-4 border-teal-500">
-        <h2 class="text-xl font-bold text-teal-700 flex items-center mb-4">
-          <i class="fas fa-tools mr-2 text-2xl"></i> Costos adicionales
-        </h2>
-        <div id="costos-adicionales-container" class="space-y-4 mb-4">
-          <div class="costo-adicional-item flex gap-2">
-            <input type="text" placeholder="Nombre del costo adicional" class="input-style bg-teal-50 border-teal-200 focus:ring-teal-500 focus:border-teal-500 flex-1" />
-            <input type="number" placeholder="Monto ($)" class="input-style bg-teal-50 border-teal-200 focus:ring-teal-500 focus:border-teal-500 w-32" />
-          </div>
-        </div>
-        <button id="agregar-costo-adicional" class="bg-teal-600 hover:bg-teal-700 text-white font-medium py-2 px-4 rounded-lg flex items-center transition">
-          <i class="fas fa-plus mr-2"></i> Agregar costo adicional
-        </button>
-      </section>
-
-      <!-- Sección: Variabilidad -->
-      <section class="p-6 bg-orange-50 border-l-4 border-orange-500">
-        <h2 class="text-xl font-bold text-orange-600 flex items-center mb-4">
-          <i class="fas fa-exclamation-triangle mr-2 text-2xl"></i> Variabilidad y control
-        </h2>
-        <div id="variabilidad-container" class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
-          <div class="variabilidad-item flex gap-2">
-            <input type="text" placeholder="Nombre de la variabilidad" class="input-style bg-orange-50 border-orange-200 focus:ring-orange-500 focus:border-orange-500 flex-1" />
-            <input type="text" placeholder="Valor" class="input-style bg-orange-50 border-orange-200 focus:ring-orange-500 focus:border-orange-500 flex-1" />
-          </div>
-        </div>
-        <button id="agregar-variabilidad" class="bg-orange-600 hover:bg-orange-700 text-white font-medium py-2 px-4 rounded-lg flex items-center transition">
-          <i class="fas fa-plus mr-2"></i> Agregar variabilidad
-        </button>
-      </section>
-
-      <!-- Sección: Ingresos -->
-      <section class="p-6 bg-gray-50 border-l-4 border-gray-500">
-        <h2 class="text-xl font-bold text-gray-800 flex items-center mb-4">
-          <i class="fas fa-chart-line mr-2 text-2xl"></i> Ingresos y proyecciones
-        </h2>
-        <div id="ingresos-container" class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
-          <div class="ingreso-item flex gap-2">
-            <input type="text" placeholder="Nombre del ingreso" class="input-style bg-gray-50 border-gray-200 focus:ring-gray-500 focus:border-gray-500 flex-1" />
-            <input type="number" placeholder="Monto ($)" class="input-style bg-gray-50 border-gray-200 focus:ring-gray-500 focus:border-gray-500 w-32" />
-          </div>
-        </div>
-        <button id="agregar-ingreso" class="bg-gray-600 hover:bg-gray-700 text-white font-medium py-2 px-4 rounded-lg flex items-center transition">
-          <i class="fas fa-plus mr-2"></i> Agregar ingreso
-        </button>
-      </section>
-
-      <!-- Sección: Retroalimentación / Resultados (oculta inicialmente) -->
-      <section id="resultados" class="p-6 bg-purple-50 border-l-4 border-purple-500 hidden transition-all duration-500 ease-in-out">
-        <h2 class="text-xl font-bold text-purple-800 flex items-center mb-4">
-          <i class="fas fa-chart-pie mr-2 text-2xl"></i> Análisis y Resultados
-        </h2>
-        <div class="bg-white border-2 border-dashed border-purple-300 rounded-xl p-4 min-h-[120px] shadow-inner">
-          <div id="contenido-resultados" class="text-gray-700">
-            <!-- Los resultados se insertarán aquí mediante JavaScript -->
-          </div>
-        </div>
-      </section>
-
-      <!-- Botón -->
-      <div class="text-center p-6 bg-gradient-to-r from-green-500 to-emerald-600">
-        <button id="calcular-btn" class="bg-gradient-to-r from-green-600 to-emerald-700 text-white font-bold text-lg px-8 py-3 rounded-full shadow-lg hover:from-green-700 hover:to-emerald-800 transition transform hover:scale-105 duration-300 ease-in-out">
-          <i class="fas fa-calculator mr-2"></i> Calcular y Simular
-        </button>
-      </div>
-    </div>
-
-    <!-- Pie de página -->
-    <footer class="text-center py-6 text-gray-600">
-      <p>© 2023 Simulador de Costos Fijos - Todos los derechos reservados</p>
-    </footer>
-  </div>
-
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: {
+              50: '#eff6ff',
+              100: '#dbeafe',
+              200: '#bfdbfe',
+              300: '#93c5fd',
+              400: '#60a5fa',
+              500: '#3b82f6', // Main primary color (Blue)
+              600: '#2563eb',
+              700: '#1d4ed8',
+              800: '#1e40af',
+              900: '#1e3a8a',
+            },
+            secondary: {
+              50: '#fffbeb',
+              100: '#fef3c7',
+              200: '#fde68a',
+              300: '#fcd34d',
+              400: '#fbbf24',
+              500: '#f59e0b', // Main secondary color (Amber)
+              600: '#d97706',
+              700: '#b45309',
+              800: '#92400e',
+              900: '#78350f',
+            },
+            accent: {
+              50: '#f0fdf4',
+              100: '#dcfce7',
+              200: '#bbf7d0',
+              300: '#86efac',
+              400: '#4ade80',
+              500: '#22c55e', // Main accent color (Green)
+              600: '#16a34a',
+              700: '#15803d',
+              800: '#166534',
+              900: '#14532d',
+            },
+            intelligence: {
+              50: '#fff7ed',
+              100: '#ffedd5',
+              200: '#fed7aa',
+              300: '#fdba74',
+              400: '#fb923c',
+              500: '#f97316', // Main intelligence color (Orange)
+              600: '#ea580c',
+              700: '#c2410c',
+              800: '#9a3412',
+              900: '#7c2d12',
+            }
+          }
+        }
+      }
+    }
+  </script>
   <style>
-    .input-style {
-      @apply border-2 rounded-xl px-4 py-3 w-full focus:outline-none focus:ring-2 focus:ring-opacity-50 transition duration-200 ease-in-out;
-      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+    .section {
+      display: none;
     }
-    .input-style:focus {
-      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    .section.active {
+      display: flex;
+      flex-direction: column;
+      height: 100%;
     }
-    .dato-negocio-item, .costo-fijo-item, .costo-adicional-item, .variabilidad-item, .ingreso-item {
-      animation: fadeIn 0.3s ease-in-out;
+    #main-container {
+        height: 700px;
     }
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(-10px); }
-      to { opacity: 1; transform: translateY(0); }
+    .nav-container {
+        background: linear-gradient(90deg, #e5e7eb, #d1d5db);
+        border-radius: 9999px;
+        padding: 0.25rem;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+    .nav-button {
+        transition: all 0.3s ease;
+        border-radius: 9999px;
+        padding: 0.625rem 1.25rem;
+        font-weight: 600;
+        position: relative;
+        z-index: 10;
+        color: #1f2937; /* text-gray-800 */
+    }
+    .nav-button.active {
+        color: white !important;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+    }
+    .nav-button:not(.active):hover {
+        background-color: #f3f4f6; /* hover:bg-gray-100 */
+    }
+    .nav-slider {
+        position: absolute;
+        top: 0.25rem;
+        left: 0.25rem;
+        height: calc(100% - 0.5rem);
+        width: calc(33.333% - 0.166rem);
+        background-color: white;
+        border-radius: 9999px;
+        transition: transform 0.3s ease;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+    .nav-button:nth-child(2).active ~ .nav-slider {
+        transform: translateX(100%);
+    }
+    .nav-button:nth-child(3).active ~ .nav-slider {
+        transform: translateX(200%);
     }
   </style>
+</head>
+<body class="bg-gray-100 min-h-screen p-4 sm:p-6 flex flex-col">
+  <div class="flex-1 flex items-center justify-center w-full max-w-6xl mx-auto">
+    <div class="w-full h-full flex flex-col">
 
-  <script>
-    // Funcionalidad para agregar datos del negocio
-    document.getElementById('agregar-dato-negocio').addEventListener('click', function() {
-      const container = document.getElementById('datos-negocio-container');
-      const newItem = document.createElement('div');
-      newItem.className = 'dato-negocio-item flex gap-2 animate-fadeIn';
-      newItem.innerHTML = `
-        <input type="text" placeholder="Nombre del dato" class="input-style bg-blue-50 border-blue-200 focus:ring-blue-500 focus:border-blue-500 flex-1" />
-        <input type="text" placeholder="Valor" class="input-style bg-blue-50 border-blue-200 focus:ring-blue-500 focus:border-blue-500 flex-1" />
-        <button class="eliminar-dato-negocio bg-blue-100 hover:bg-blue-200 text-blue-600 rounded-lg px-3 transition">
-          <i class="fas fa-times"></i>
-        </button>
-      `;
-      container.appendChild(newItem);
-      
-      // Agregar evento para eliminar el item
-      newItem.querySelector('.eliminar-dato-negocio').addEventListener('click', function() {
-        newItem.remove();
-      });
-    });
+      <!-- Navigation with improved styling -->
+      <nav class="mb-6 w-full py-4">
+        <div class="nav-container relative">
+          <div class="nav-slider"></div>
+          <ul class="flex relative z-20">
+            <li class="flex-1">
+              <button id="btn-info" onclick="switchSection('info')"
+                class="nav-button w-full text-center text-sm active">
+                INFORMACIÓN
+              </button>
+            </li>
+            <li class="flex-1">
+              <button id="btn-costs" onclick="switchSection('costs')"
+                class="nav-button w-full text-center text-sm">
+                COSTOS FIJOS
+              </button>
+            </li>
+            <li class="flex-1">
+              <button id="btn-intelligence" onclick="switchSection('intelligence')"
+                class="nav-button w-full text-center text-sm">
+                RESULTADOS IA
+              </button>
+            </li>
+          </ul>
+        </div>
+      </nav>
 
-    // Funcionalidad para agregar costos fijos
-    document.getElementById('agregar-costo-fijo').addEventListener('click', function() {
-      const container = document.getElementById('costos-fijos-container');
-      const newItem = document.createElement('div');
-      newItem.className = 'costo-fijo-item flex gap-2 animate-fadeIn';
-      newItem.innerHTML = `
-        <input type="text" placeholder="Nombre del costo" class="input-style bg-red-50 border-red-200 focus:ring-red-500 focus:border-red-500 flex-1" />
-        <input type="number" placeholder="Monto ($)" class="input-style bg-red-50 border-red-200 focus:ring-red-500 focus:border-red-500 w-32" />
-        <button class="eliminar-costo-fijo bg-red-100 hover:bg-red-200 text-red-600 rounded-lg px-3 transition">
-          <i class="fas fa-times"></i>
-        </button>
-      `;
-      container.appendChild(newItem);
-      
-      // Agregar evento para eliminar el item
-      newItem.querySelector('.eliminar-costo-fijo').addEventListener('click', function() {
-        newItem.remove();
-      });
-    });
-
-    // Funcionalidad para agregar costos adicionales
-    document.getElementById('agregar-costo-adicional').addEventListener('click', function() {
-      const container = document.getElementById('costos-adicionales-container');
-      const newItem = document.createElement('div');
-      newItem.className = 'costo-adicional-item flex gap-2 animate-fadeIn';
-      newItem.innerHTML = `
-        <input type="text" placeholder="Nombre del costo adicional" class="input-style bg-teal-50 border-teal-200 focus:ring-teal-500 focus:border-teal-500 flex-1" />
-        <input type="number" placeholder="Monto ($)" class="input-style bg-teal-50 border-teal-200 focus:ring-teal-500 focus:border-teal-500 w-32" />
-        <button class="eliminar-costo-adicional bg-teal-100 hover:bg-teal-200 text-teal-600 rounded-lg px-3 transition">
-          <i class="fas fa-times"></i>
-        </button>
-      `;
-      container.appendChild(newItem);
-      
-      // Agregar evento para eliminar el item
-      newItem.querySelector('.eliminar-costo-adicional').addEventListener('click', function() {
-        newItem.remove();
-      });
-    });
-
-    // Funcionalidad para agregar variabilidad
-    document.getElementById('agregar-variabilidad').addEventListener('click', function() {
-      const container = document.getElementById('variabilidad-container');
-      const newItem = document.createElement('div');
-      newItem.className = 'variabilidad-item flex gap-2 animate-fadeIn';
-      newItem.innerHTML = `
-        <input type="text" placeholder="Nombre de la variabilidad" class="input-style bg-orange-50 border-orange-200 focus:ring-orange-500 focus:border-orange-500 flex-1" />
-        <input type="text" placeholder="Valor" class="input-style bg-orange-50 border-orange-200 focus:ring-orange-500 focus:border-orange-500 flex-1" />
-        <button class="eliminar-variabilidad bg-orange-100 hover:bg-orange-200 text-orange-600 rounded-lg px-3 transition">
-          <i class="fas fa-times"></i>
-        </button>
-      `;
-      container.appendChild(newItem);
-      
-      // Agregar evento para eliminar el item
-      newItem.querySelector('.eliminar-variabilidad').addEventListener('click', function() {
-        newItem.remove();
-      });
-    });
-
-    // Funcionalidad para agregar ingresos
-    document.getElementById('agregar-ingreso').addEventListener('click', function() {
-      const container = document.getElementById('ingresos-container');
-      const newItem = document.createElement('div');
-      newItem.className = 'ingreso-item flex gap-2 animate-fadeIn';
-      newItem.innerHTML = `
-        <input type="text" placeholder="Nombre del ingreso" class="input-style bg-gray-50 border-gray-200 focus:ring-gray-500 focus:border-gray-500 flex-1" />
-        <input type="number" placeholder="Monto ($)" class="input-style bg-gray-50 border-gray-200 focus:ring-gray-500 focus:border-gray-500 w-32" />
-        <button class="eliminar-ingreso bg-gray-100 hover:bg-gray-200 text-gray-600 rounded-lg px-3 transition">
-          <i class="fas fa-times"></i>
-        </button>
-      `;
-      container.appendChild(newItem);
-      
-      // Agregar evento para eliminar el item
-      newItem.querySelector('.eliminar-ingreso').addEventListener('click', function() {
-        newItem.remove();
-      });
-    });
-
-    // Delegación de eventos para los botones de eliminar existentes
-    document.getElementById('datos-negocio-container').addEventListener('click', function(e) {
-      if (e.target.closest('.eliminar-dato-negocio')) {
-        e.target.closest('.dato-negocio-item').remove();
-      }
-    });
-
-    document.getElementById('costos-fijos-container').addEventListener('click', function(e) {
-      if (e.target.closest('.eliminar-costo-fijo')) {
-        e.target.closest('.costo-fijo-item').remove();
-      }
-    });
-
-    document.getElementById('costos-adicionales-container').addEventListener('click', function(e) {
-      if (e.target.closest('.eliminar-costo-adicional')) {
-        e.target.closest('.costo-adicional-item').remove();
-      }
-    });
-
-    document.getElementById('variabilidad-container').addEventListener('click', function(e) {
-      if (e.target.closest('.eliminar-variabilidad')) {
-        e.target.closest('.variabilidad-item').remove();
-      }
-    });
-
-    document.getElementById('ingresos-container').addEventListener('click', function(e) {
-      if (e.target.closest('.eliminar-ingreso')) {
-        e.target.closest('.ingreso-item').remove();
-      }
-    });
-
-    document.getElementById('calcular-btn').addEventListener('click', function() {
-      // Mostrar la sección de resultados
-      const resultadosSection = document.getElementById('resultados');
-      resultadosSection.classList.remove('hidden');
-      
-      // Obtener costos fijos dinámicos
-      let costosFijos = 0;
-      const costosFijosDetalle = [];
-      const costosFijosItems = document.querySelectorAll('.costo-fijo-item');
-      
-      costosFijosItems.forEach(item => {
-        const nombre = item.querySelector('input[type="text"]').value || 'Costo sin nombre';
-        const monto = parseFloat(item.querySelector('input[type="number"]').value) || 0;
-        costosFijos += monto;
-        costosFijosDetalle.push({ nombre, monto });
-      });
-      
-      // Obtener costos adicionales
-      let costosAdicionales = 0;
-      const costosAdicionalesDetalle = [];
-      const costosAdicionalesItems = document.querySelectorAll('.costo-adicional-item');
-      
-      costosAdicionalesItems.forEach(item => {
-        const nombre = item.querySelector('input[type="text"]').value || 'Costo adicional sin nombre';
-        const monto = parseFloat(item.querySelector('input[type="number"]').value) || 0;
-        costosAdicionales += monto;
-        costosAdicionalesDetalle.push({ nombre, monto });
-      });
-      
-      // Obtener ingresos
-      let ingresoMensual = 0;
-      const ingresosDetalle = [];
-      const ingresosItems = document.querySelectorAll('.ingreso-item');
-      
-      ingresosItems.forEach(item => {
-        const nombre = item.querySelector('input[type="text"]').value || 'Ingreso sin nombre';
-        const monto = parseFloat(item.querySelector('input[type="number"]').value) || 0;
-        ingresoMensual += monto;
-        ingresosDetalle.push({ nombre, monto });
-      });
-      
-      // Calcular costos totales
-      const costosTotales = costosFijos + costosAdicionales;
-      const utilidadMensual = ingresoMensual - costosTotales;
-      
-      // Generar contenido de resultados
-      let detalleCostosFijos = '';
-      costosFijosDetalle.forEach(costo => {
-        detalleCostosFijos += `
-          <div class="flex justify-between py-1">
-            <span>${costo.nombre}</span>
-            <span class="font-medium">$${costo.monto.toLocaleString()}</span>
-          </div>
-        `;
-      });
-      
-      let detalleCostosAdicionales = '';
-      costosAdicionalesDetalle.forEach(costo => {
-        detalleCostosAdicionales += `
-          <div class="flex justify-between py-1">
-            <span>${costo.nombre}</span>
-            <span class="font-medium">$${costo.monto.toLocaleString()}</span>
-          </div>
-        `;
-      });
-      
-      let detalleIngresos = '';
-      ingresosDetalle.forEach(ingreso => {
-        detalleIngresos += `
-          <div class="flex justify-between py-1">
-            <span>${ingreso.nombre}</span>
-            <span class="font-medium">$${ingreso.monto.toLocaleString()}</span>
-          </div>
-        `;
-      });
-      
-      const contenidoResultados = `
-        <div class="space-y-4">
-          <h3 class="font-bold text-lg text-purple-700 border-b pb-2">Resumen Financiero Mensual</h3>
-          
-          ${detalleIngresos ? `
-          <div class="bg-green-50 p-4 rounded-lg border border-green-200 shadow-sm">
-            <h4 class="font-bold text-green-700 mb-2 flex items-center"><i class="fas fa-coins mr-2"></i> Detalle de Ingresos</h4>
-            <div class="space-y-1">
-              ${detalleIngresos}
-              <div class="flex justify-between pt-2 mt-2 border-t border-green-200 font-bold">
-                <span>Total Ingresos</span>
-                <span>$${ingresoMensual.toLocaleString()}</span>
+      <!-- Main Container -->
+      <div id="main-container" class="flex flex-col rounded-xl bg-white p-6 shadow-xl overflow-hidden">
+        
+        <!-- Information Section -->
+        <div id="section-info" class="section active">
+          <div class="flex h-full w-full flex-col gap-6 lg:flex-row">
+            <!-- Left Column -->
+            <div class="flex flex-1 flex-col space-y-6">
+              <div class="rounded-xl bg-gradient-to-br from-blue-50 to-indigo-50 p-6 shadow-inner">
+                <h2 class="mb-4 text-2xl font-bold text-primary-800">Simulador</h2>
+                <div class="prose max-w-none">
+                  <p class="leading-relaxed text-gray-700">
+                    Bienvenido al simulador de cafetería. Ingresa los datos de tu negocio para comenzar con el análisis.
+                  </p>
+                </div>
+              </div>
+              <div class="flex-1 rounded-xl bg-gradient-to-br from-gray-50 to-blue-50 p-6 shadow-inner flex items-center justify-center">
+                <div class="text-center">
+                    <div class="mb-3 text-4xl">📽️</div>
+                    <h3 class="text-lg font-semibold text-gray-700 mb-1">Video Instructivo</h3>
+                    <p class="text-sm text-gray-500">Haz clic para reproducir</p>
+                </div>
               </div>
             </div>
-          </div>
-          ` : ''}
-          
-          ${detalleCostosFijos ? `
-          <div class="bg-red-50 p-4 rounded-lg border border-red-200 shadow-sm">
-            <h4 class="font-bold text-red-700 mb-2 flex items-center"><i class="fas fa-list mr-2"></i> Detalle de Costos Fijos</h4>
-            <div class="space-y-1">
-              ${detalleCostosFijos}
-              <div class="flex justify-between pt-2 mt-2 border-t border-red-200 font-bold">
-                <span>Total Costos Fijos</span>
-                <span>$${costosFijos.toLocaleString()}</span>
-              </div>
-            </div>
-          </div>
-          ` : ''}
-          
-          ${detalleCostosAdicionales ? `
-          <div class="bg-teal-50 p-4 rounded-lg border border-teal-200 shadow-sm">
-            <h4 class="font-bold text-teal-700 mb-2 flex items-center"><i class="fas fa-tools mr-2"></i> Detalle de Costos Adicionales</h4>
-            <div class="space-y-1">
-              ${detalleCostosAdicionales}
-              <div class="flex justify-between pt-2 mt-2 border-t border-teal-200 font-bold">
-                <span>Total Costos Adicionales</span>
-                <span>$${costosAdicionales.toLocaleString()}</span>
-              </div>
-            </div>
-          </div>
-          ` : ''}
-          
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div class="bg-red-50 p-4 rounded-lg border border-red-200 shadow-sm">
-              <p class="text-sm text-red-600 flex items-center"><i class="fas fa-receipt mr-2"></i> Costos Totales</p>
-              <p class="font-bold text-red-800 text-xl">$${costosTotales.toLocaleString()}</p>
-            </div>
-            <div class="bg-purple-50 p-4 rounded-lg border border-purple-200 shadow-sm">
-              <p class="text-sm text-purple-600 flex items-center"><i class="fas fa-piggy-bank mr-2"></i> Utilidad Estimada</p>
-              <p class="font-bold text-purple-800 text-xl">$${utilidadMensual.toLocaleString()}</p>
-            </div>
-          </div>
-          
-          <div class="mt-4 bg-yellow-50 p-4 rounded-lg border border-yellow-200 shadow-sm">
-            <h4 class="font-bold text-yellow-700 mb-2 flex items-center"><i class="fas fa-lightbulb mr-2"></i> Análisis</h4>
-            <p class="text-yellow-800 mb-2">
-              ${utilidadMensual > 0 
-                ? `<span class="text-green-600 font-semibold"><i class="fas fa-check-circle mr-1"></i> ¡Excelente!</span> El negocio es rentable con $${utilidadMensual.toLocaleString()} de utilidad mensual.` 
-                : `<span class="text-red-600 font-semibold"><i class="fas fa-times-circle mr-1"></i> ¡Cuidado!</span> El negocio tiene pérdidas de $${Math.abs(utilidadMensual).toLocaleString()} mensuales.`}
-            </p>
-          </div>
-          
-          <div class="bg-indigo-50 p-4 rounded-lg border border-indigo-200 shadow-sm">
-            <h4 class="font-bold text-indigo-700 mb-2 flex items-center"><i class="fas fa-bullseye mr-2"></i> Proyecciones</h4>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
-              <div class="text-center">
-                <p class="text-indigo-600 text-sm">Trimestral</p>
-                <p class="font-bold text-indigo-800">$${(utilidadMensual * 3).toLocaleString()}</p>
-              </div>
-              <div class="text-center">
-                <p class="text-indigo-600 text-sm">Semestral</p>
-                <p class="font-bold text-indigo-800">$${(utilidadMensual * 6).toLocaleString()}</p>
-              </div>
-              <div class="text-center">
-                <p class="text-indigo-600 text-sm">Anual</p>
-                <p class="font-bold text-indigo-800">$${(utilidadMensual * 12).toLocaleString()}</p>
+            
+            <!-- Right Column - Form -->
+            <div class="flex flex-col space-y-6 lg:w-1/3">
+              <div class="rounded-xl bg-gradient-to-br from-white to-gray-50 p-6 shadow-md border border-gray-100">
+                <h2 class="mb-5 text-xl font-bold text-gray-800">
+                  Datos de la Cafetería
+                </h2>
+                <div class="space-y-5">
+                  <div>
+                    <label class="mb-2 block text-sm font-medium text-gray-700">
+                      Nombre de la Cafetería
+                    </label>
+                    <input
+                      type="text"
+                      id="cafe-name"
+                      placeholder="Nombre de tu cafetería"
+                      class="w-full rounded-lg border border-gray-300 px-4 py-3 transition-all focus:border-primary-500 focus:ring-2 focus:ring-primary-200 focus:outline-none"
+                    />
+                  </div>
+                  <div>
+                    <label class="mb-2 block text-sm font-medium text-gray-700">
+                      Ubicación
+                    </label>
+                    <select
+                      id="cafe-location"
+                      class="w-full rounded-lg border border-gray-300 px-4 py-3 transition-all focus:border-primary-500 focus:ring-2 focus:ring-primary-200 focus:outline-none"
+                    >
+                      <option value="">Selecciona la ubicación</option>
+                      <option value="norte">Norte</option>
+                      <option value="centro-norte">Centro Norte</option>
+                      <option value="centro-sur">Centro Sur</option>
+                      <option value="sur">Sur</option>
+                      <option value="otros">Otros</option>
+                    </select>
+                  </div>
+                  <button
+                    type="button"
+                    onclick="switchSection('costs')"
+                    class="w-full rounded-full bg-gradient-to-r from-primary-600 to-primary-700 px-4 py-3 text-sm font-semibold text-white shadow-lg transition-all hover:from-primary-700 hover:to-primary-800 hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2">
+                    Siguiente
+                  </button>
+                </div>
               </div>
             </div>
           </div>
         </div>
+
+        <!-- Fixed Costs Section -->
+        <div id="section-costs" class="section h-full flex flex-col">
+          <div class="flex min-h-0 flex-1 flex-col rounded-xl bg-gradient-to-b from-white to-gray-50 p-6 shadow-inner">
+            <h2 class="mb-5 text-xl font-bold text-gray-800">
+              Costos Fijos de la Cafetería
+            </h2>
+            
+            <!-- Scrollable cost items area -->
+            <div class="mb-5 min-h-0 flex-1">
+              <div id="cost-items-container" class="h-full space-y-4 overflow-y-auto pr-2">
+                <!-- Initial cost item -->
+                <div class="cost-item flex gap-3 items-start">
+                  <div class="flex-1">
+                    <input
+                      type="text"
+                      placeholder="Nombre del costo (ej: Alquiler)"
+                      class="cost-name w-full rounded-lg border border-gray-300 px-4 py-3 transition-all focus:border-primary-500 focus:ring-2 focus:ring-primary-200 focus:outline-none"
+                    />
+                  </div>
+                  <div class="w-32">
+                    <input
+                      type="number"
+                      placeholder="Monto"
+                      class="cost-amount w-full rounded-lg border border-gray-300 px-4 py-3 transition-all focus:border-primary-500 focus:ring-2 focus:ring-primary-200 focus:outline-none"
+                    />
+                  </div>
+                  <div class="flex items-center pt-3">
+                    <button
+                      type="button"
+                      class="remove-item p-2 text-gray-400 hover:text-red-500 transition-colors rounded-full hover:bg-red-50"
+                    >
+                      <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                        <path fill-rule="evenodd" d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z" clip-rule="evenodd" />
+                      </svg>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <!-- Fixed bottom section -->
+            <div class="space-y-5 pt-5 border-t border-gray-200">
+              <button
+                type="button"
+                id="add-cost-btn"
+                class="flex items-center gap-2 rounded-full bg-gradient-to-r from-blue-50 to-indigo-50 px-4 py-2.5 text-sm font-semibold text-primary-700 transition-all hover:from-blue-100 hover:to-indigo-100 shadow-sm border border-blue-200"
+              >
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                  <path fill-rule="evenodd" d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z" clip-rule="evenodd" />
+                </svg>
+                Agregar Costo
+              </button>
+              
+              <div class="rounded-xl bg-gradient-to-r from-amber-50 to-yellow-50 p-5 border border-amber-200">
+                <div class="flex items-center justify-between">
+                  <span class="font-semibold text-amber-800">
+                    Total Costos Mensuales:
+                  </span>
+                  <span id="total-cost" class="text-2xl font-bold text-amber-600">
+                    $0.00
+                  </span>
+                </div>
+              </div>
+              
+              <div class="flex flex-col sm:flex-row gap-3">
+                <button
+                  type="button"
+                  id="analyze-btn"
+                  class="flex-1 rounded-full bg-gradient-to-r from-accent-600 to-accent-700 px-6 py-3.5 text-sm font-semibold text-white shadow-lg transition-all hover:from-accent-700 hover:to-accent-800 hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-accent-500 focus:ring-offset-2"
+                >
+                  <div class="flex items-center justify-center gap-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                      <path fill-rule="evenodd" d="M12.316 3.051a1 1 0 01.633 1.265l-4 12a1 1 0 11-1.898-.632l4-12a1 1 0 011.265-.633zM5.707 6.293a1 1 0 010 1.414L3.414 10l2.293 2.293a1 1 0 11-1.414 1.414l-3-3a1 1 0 010-1.414l3-3a1 1 0 011.414 0zm8.586 0a1 1 0 011.414 0l3 3a1 1 0 010 1.414l-3 3a1 1 0 11-1.414-1.414L16.586 10l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd" />
+                    </svg>
+                    Analizar con IA
+                  </div>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Intelligence Results Section -->
+        <div id="section-intelligence" class="section h-full flex flex-col">
+          <div class="flex min-h-0 flex-1 flex-col rounded-xl bg-gradient-to-b from-white to-gray-50 p-6 shadow-inner">
+            <h2 class="mb-5 text-xl font-bold text-gray-800">
+              Resultados de Análisis con IA
+            </h2>
+            
+            <div class="space-y-5 flex-1 overflow-y-auto">
+              <div class="rounded-xl bg-gradient-to-br from-blue-50 to-indigo-50 p-5 shadow-sm">
+                <h3 class="mb-3 text-lg font-semibold text-blue-800">Resumen del Análisis</h3>
+                <p class="text-gray-700 leading-relaxed">
+                  Basado en los datos proporcionados, el análisis indica que tu cafetería tiene un potencial sólido para crecer. 
+                  Se recomienda enfocarse en la optimización de costos y la mejora de la experiencia del cliente.
+                </p>
+              </div>
+              
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div class="rounded-xl bg-gradient-to-br from-green-50 to-emerald-50 p-5 shadow-sm border border-green-200">
+                  <h4 class="mb-2 text-md font-semibold text-green-800 flex items-center gap-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                      <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                    </svg>
+                    Puntos Fuertes
+                  </h4>
+                  <ul class="space-y-1 text-green-700">
+                    <li class="flex items-start gap-2">
+                      <span class="text-green-500">•</span>
+                      <span>Buena ubicación</span>
+                    </li>
+                    <li class="flex items-start gap-2">
+                      <span class="text-green-500">•</span>
+                      <span>Costos operativos controlados</span>
+                    </li>
+                  </ul>
+                </div>
+                
+                <div class="rounded-xl bg-gradient-to-br from-amber-50 to-yellow-50 p-5 shadow-sm border border-amber-200">
+                  <h4 class="mb-2 text-md font-semibold text-amber-800 flex items-center gap-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                      <path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clip-rule="evenodd" />
+                    </svg>
+                    Áreas de Mejora
+                  </h4>
+                  <ul class="space-y-1 text-amber-700">
+                    <li class="flex items-start gap-2">
+                      <span class="text-amber-500">•</span>
+                      <span>Aumentar marketing digital</span>
+                    </li>
+                    <li class="flex items-start gap-2">
+                      <span class="text-amber-500">•</span>
+                      <span>Diversificar menú</span>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+              
+              <div class="rounded-xl bg-gradient-to-br from-intelligence-50 to-orange-50 p-5 shadow-sm border border-intelligence-200">
+                <h4 class="mb-3 text-lg font-semibold text-intelligence-800 flex items-center gap-2">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                    <path d="M10 12a2 2 0 100-4 2 2 0 000 4z" />
+                    <path fill-rule="evenodd" d="M.458 10C1.732 5.943 5.522 3 10 3s8.268 2.943 9.542 7c-1.274 4.057-5.064 7-9.542 7S1.732 14.057.458 10zM14 10a4 4 0 11-8 0 4 4 0 018 0z" clip-rule="evenodd" />
+                  </svg>
+                  Recomendaciones Personalizadas
+                </h4>
+                <ul class="space-y-2">
+                  <li class="flex items-start gap-3">
+                    <span class="flex-shrink-0 mt-1 w-6 h-6 rounded-full bg-intelligence-500 text-white text-xs flex items-center justify-center">1</span>
+                    <span class="text-intelligence-700">Implementar un programa de lealtad para clientes frecuentes.</span>
+                  </li>
+                  <li class="flex items-start gap-3">
+                    <span class="flex-shrink-0 mt-1 w-6 h-6 rounded-full bg-intelligence-500 text-white text-xs flex items-center justify-center">2</span>
+                    <span class="text-intelligence-700">Optimizar la compra de insumos buscando proveedores más competitivos.</span>
+                  </li>
+                  <li class="flex items-start gap-3">
+                    <span class="flex-shrink-0 mt-1 w-6 h-6 rounded-full bg-intelligence-500 text-white text-xs flex items-center justify-center">3</span>
+                    <span class="text-intelligence-700">Crear contenido en redes sociales para atraer nuevos clientes.</span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal -->
+  <div id="modal" class="fixed inset-0 z-50 hidden items-center justify-center bg-black bg-opacity-60 p-4">
+    <div class="max-h-[90vh] w-full max-w-md scale-100 overflow-y-auto rounded-2xl bg-white opacity-100 shadow-2xl transition-all">
+      <div class="p-6">
+        <div class="mb-5 flex items-center justify-between">
+          <h3 class="text-xl font-bold text-gray-800">
+            Análisis de la Cafetería
+          </h3>
+          <button id="close-modal-btn" class="text-2xl text-gray-500 hover:text-gray-700 transition-colors">
+            ×
+          </button>
+        </div>
+        <div class="mb-6">
+          <p class="mb-4 text-gray-700">
+            Análisis: <span id="modal-analysis" class="font-semibold text-primary-700">Sin datos</span>
+          </p>
+          <div class="rounded-xl bg-gradient-to-br from-blue-50 to-indigo-50 p-5 border border-blue-200">
+            <h4 class="mb-3 font-semibold text-blue-800 flex items-center gap-2">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd" />
+              </svg>
+              Recomendaciones:
+            </h4>
+            <ul class="space-y-2">
+              <li class="flex items-start gap-2">
+                <span class="text-blue-500 mt-1">•</span>
+                <span class="text-blue-700">Optimizar costos de insumos buscando proveedores alternativos</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-blue-500 mt-1">•</span>
+                <span class="text-blue-700">Mejorar estrategia de precios analizando la competencia local</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-blue-500 mt-1">•</span>
+                <span class="text-blue-700">Aumentar clientes frecuentes con un programa de lealtad</span>
+              </li>
+            </ul>
+          </div>
+          <div class="mt-5 rounded-xl bg-gradient-to-br from-amber-50 to-yellow-50 p-5 border border-amber-200">
+            <h4 class="mb-3 font-semibold text-amber-800 flex items-center gap-2">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                <path d="M10 12a2 2 0 100-4 2 2 0 000 4z" />
+                <path fill-rule="evenodd" d="M.458 10C1.732 5.943 5.522 3 10 3s8.268 2.943 9.542 7c-1.274 4.057-5.064 7-9.542 7S1.732 14.057.458 10zM14 10a4 4 0 11-8 0 4 4 0 018 0z" clip-rule="evenodd" />
+              </svg>
+              Resumen:
+            </h4>
+            <p class="text-amber-700">
+              Basado en el análisis, se recomienda enfocarse en la optimización de costos y la mejora de la experiencia del cliente para aumentar la rentabilidad.
+            </p>
+          </div>
+        </div>
+        <div class="flex justify-end">
+          <button id="close-modal-btn-2" class="rounded-full bg-gradient-to-r from-primary-600 to-primary-700 px-6 py-2.5 font-semibold text-white shadow-md transition-all hover:from-primary-700 hover:to-primary-800 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2">
+            Cerrar
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    let activeSection = 'info';
+    let costItemIdCounter = 2;
+
+    function switchSection(sectionId) {
+      document.getElementById(`section-${activeSection}`).classList.remove('active');
+      document.getElementById(`section-${sectionId}`).classList.add('active');
+      activeSection = sectionId;
+      
+      // Update navigation buttons
+      document.querySelectorAll('.nav-button').forEach(btn => {
+        btn.classList.remove('active');
+      });
+      
+      if (sectionId === 'info') {
+        document.getElementById('btn-info').classList.add('active');
+      } else if (sectionId === 'costs') {
+        document.getElementById('btn-costs').classList.add('active');
+      } else if (sectionId === 'intelligence') {
+        document.getElementById('btn-intelligence').classList.add('active');
+      }
+    }
+
+    // Fixed Costs Functionality
+    const container = document.getElementById('cost-items-container');
+    const addItemButton = document.getElementById('add-cost-btn');
+    const analyzeButton = document.getElementById('analyze-btn');
+    const modal = document.getElementById('modal');
+    const closeModalButtons = document.querySelectorAll('#close-modal-btn, #close-modal-btn-2');
+    const totalCostElement = document.getElementById('total-cost');
+
+    function createCostItem() {
+      const newItem = document.createElement('div');
+      newItem.className = 'cost-item flex gap-3 items-start';
+      newItem.innerHTML = `
+        <div class="flex-1">
+          <input
+            type="text"
+            placeholder="Nombre del costo (ej: Alquiler)"
+            class="cost-name w-full rounded-lg border border-gray-300 px-4 py-3 transition-all focus:border-primary-500 focus:ring-2 focus:ring-primary-200 focus:outline-none"
+          />
+        </div>
+        <div class="w-32">
+          <input
+            type="number"
+            placeholder="Monto"
+            class="cost-amount w-full rounded-lg border border-gray-300 px-4 py-3 transition-all focus:border-primary-500 focus:ring-2 focus:ring-primary-200 focus:outline-none"
+          />
+        </div>
+        <div class="flex items-center pt-3">
+          <button
+            type="button"
+            class="remove-item p-2 text-gray-400 hover:text-red-500 transition-colors rounded-full hover:bg-red-50"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+              <path fill-rule="evenodd" d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z" clip-rule="evenodd" />
+            </svg>
+          </button>
+        </div>
       `;
-      
-      // Insertar contenido en la sección de resultados
-      document.getElementById('contenido-resultados').innerHTML = contenidoResultados;
-      
-      // Desplazar la vista hacia la sección de resultados
-      resultadosSection.scrollIntoView({ behavior: 'smooth' });
+      return newItem;
+    }
+
+    addItemButton.addEventListener('click', () => {
+       const newItem = createCostItem();
+       container.appendChild(newItem);
+       attachRemoveListener(newItem);
+       updateTotalCost();
     });
+
+    function attachRemoveListener(itemElement) {
+       const removeButton = itemElement.querySelector('.remove-item');
+       removeButton.addEventListener('click', () => {
+           if (container.children.length > 1) {
+               itemElement.remove();
+               updateTotalCost();
+           }
+       });
+    }
+    
+    attachRemoveListener(container.querySelector('.cost-item'));
+
+    function updateTotalCost() {
+        let total = 0;
+        document.querySelectorAll('.cost-item').forEach(item => {
+            const amountInput = item.querySelector('.cost-amount');
+            const amount = parseFloat(amountInput.value) || 0;
+            total += amount;
+        });
+        totalCostElement.textContent = `$${total.toFixed(2)}`;
+    }
+
+    container.addEventListener('input', (e) => {
+        if (e.target.classList.contains('cost-amount')) {
+            updateTotalCost();
+        }
+    });
+
+    // Modal
+    analyzeButton.addEventListener('click', () => {
+        const cafeName = document.getElementById('cafe-name').value || 'Sin nombre';
+        document.getElementById('modal-analysis').textContent = `Análisis para "${cafeName}"`;
+        modal.classList.remove('hidden');
+        modal.classList.add('flex');
+    });
+
+    closeModalButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+        });
+    });
+
+    modal.addEventListener('click', (e) => {
+        if (e.target === modal) {
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+        }
+    });
+
   </script>
 </body>
 </html>
