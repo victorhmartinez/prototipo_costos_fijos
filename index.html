@@ -1,68 +1,10 @@
-<!DOCTYPE html>
+<p></p><!DOCTYPE html>
 <html lang="es">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Simulador de Cafetería</title>
   <script src="https://cdn.tailwindcss.com"></script>
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          colors: {
-            primary: {
-              50: '#eff6ff',
-              100: '#dbeafe',
-              200: '#bfdbfe',
-              300: '#93c5fd',
-              400: '#60a5fa',
-              500: '#3b82f6', // Main primary color (Blue)
-              600: '#2563eb',
-              700: '#1d4ed8',
-              800: '#1e40af',
-              900: '#1e3a8a',
-            },
-            secondary: {
-              50: '#fffbeb',
-              100: '#fef3c7',
-              200: '#fde68a',
-              300: '#fcd34d',
-              400: '#fbbf24',
-              500: '#f59e0b', // Main secondary color (Amber)
-              600: '#d97706',
-              700: '#b45309',
-              800: '#92400e',
-              900: '#78350f',
-            },
-            accent: {
-              50: '#f0fdf4',
-              100: '#dcfce7',
-              200: '#bbf7d0',
-              300: '#86efac',
-              400: '#4ade80',
-              500: '#22c55e', // Main accent color (Green)
-              600: '#16a34a',
-              700: '#15803d',
-              800: '#166534',
-              900: '#14532d',
-            },
-            intelligence: {
-              50: '#fff7ed',
-              100: '#ffedd5',
-              200: '#fed7aa',
-              300: '#fdba74',
-              400: '#fb923c',
-              500: '#f97316', // Main intelligence color (Orange)
-              600: '#ea580c',
-              700: '#c2410c',
-              800: '#9a3412',
-              900: '#7c2d12',
-            }
-          }
-        }
-      }
-    }
-  </script>
   <style>
     .section {
       display: none;
@@ -88,42 +30,24 @@
         font-weight: 600;
         position: relative;
         z-index: 10;
-        color: #1f2937; /* text-gray-800 */
+        color: #1f2937;
     }
     .nav-button.active {
-        color: white !important;
+        color: black !important;
+        background-color: white !important;
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
     }
     .nav-button:not(.active):hover {
-        background-color: #f3f4f6; /* hover:bg-gray-100 */
-    }
-    .nav-slider {
-        position: absolute;
-        top: 0.25rem;
-        left: 0.25rem;
-        height: calc(100% - 0.5rem);
-        width: calc(33.333% - 0.166rem);
-        background-color: white;
-        border-radius: 9999px;
-        transition: transform 0.3s ease;
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    }
-    .nav-button:nth-child(2).active ~ .nav-slider {
-        transform: translateX(100%);
-    }
-    .nav-button:nth-child(3).active ~ .nav-slider {
-        transform: translateX(200%);
+        background-color: #f3f4f6;
     }
   </style>
 </head>
 <body class="bg-gray-100 min-h-screen p-4 sm:p-6 flex flex-col">
   <div class="flex-1 flex items-center justify-center w-full max-w-6xl mx-auto">
     <div class="w-full h-full flex flex-col">
-
-      <!-- Navigation with improved styling -->
+      <!-- Navigation -->
       <nav class="mb-6 w-full py-4">
         <div class="nav-container relative">
-          <div class="nav-slider"></div>
           <ul class="flex relative z-20">
             <li class="flex-1">
               <button id="btn-info" onclick="switchSection('info')"
@@ -149,14 +73,13 @@
 
       <!-- Main Container -->
       <div id="main-container" class="flex flex-col rounded-xl bg-white p-6 shadow-xl overflow-hidden">
-        
         <!-- Information Section -->
         <div id="section-info" class="section active">
           <div class="flex h-full w-full flex-col gap-6 lg:flex-row">
             <!-- Left Column -->
             <div class="flex flex-1 flex-col space-y-6">
               <div class="rounded-xl bg-gradient-to-br from-blue-50 to-indigo-50 p-6 shadow-inner">
-                <h2 class="mb-4 text-2xl font-bold text-primary-800">Simulador</h2>
+                <h2 class="mb-4 text-2xl font-bold text-blue-800">Simulador</h2>
                 <div class="prose max-w-none">
                   <p class="leading-relaxed text-gray-700">
                     Bienvenido al simulador de cafetería. Ingresa los datos de tu negocio para comenzar con el análisis.
@@ -171,7 +94,6 @@
                 </div>
               </div>
             </div>
-            
             <!-- Right Column - Form -->
             <div class="flex flex-col space-y-6 lg:w-1/3">
               <div class="rounded-xl bg-gradient-to-br from-white to-gray-50 p-6 shadow-md border border-gray-100">
@@ -187,7 +109,7 @@
                       type="text"
                       id="cafe-name"
                       placeholder="Nombre de tu cafetería"
-                      class="w-full rounded-lg border border-gray-300 px-4 py-3 transition-all focus:border-primary-500 focus:ring-2 focus:ring-primary-200 focus:outline-none"
+                      class="w-full rounded-lg border border-gray-300 px-4 py-3 transition-all focus:border-blue-500 focus:ring-2 focus:ring-blue-200 focus:outline-none"
                     />
                   </div>
                   <div>
@@ -196,7 +118,7 @@
                     </label>
                     <select
                       id="cafe-location"
-                      class="w-full rounded-lg border border-gray-300 px-4 py-3 transition-all focus:border-primary-500 focus:ring-2 focus:ring-primary-200 focus:outline-none"
+                      class="w-full rounded-lg border border-gray-300 px-4 py-3 transition-all focus:border-blue-500 focus:ring-2 focus:ring-blue-200 focus:outline-none"
                     >
                       <option value="">Selecciona la ubicación</option>
                       <option value="norte">Norte</option>
@@ -209,7 +131,8 @@
                   <button
                     type="button"
                     onclick="switchSection('costs')"
-                    class="w-full rounded-full bg-gradient-to-r from-primary-600 to-primary-700 px-4 py-3 text-sm font-semibold text-white shadow-lg transition-all hover:from-primary-700 hover:to-primary-800 hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2">
+                    class="w-full rounded-full bg-gradient-to-r from-blue-600 to-blue-700 px-4 py-3 text-sm font-semibold text-white shadow-lg transition-all hover:from-blue-700 hover:to-blue-800 hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+                  >
                     Siguiente
                   </button>
                 </div>
@@ -234,14 +157,14 @@
                     <input
                       type="text"
                       placeholder="Nombre del costo (ej: Alquiler)"
-                      class="cost-name w-full rounded-lg border border-gray-300 px-4 py-3 transition-all focus:border-primary-500 focus:ring-2 focus:ring-primary-200 focus:outline-none"
+                      class="cost-name w-full rounded-lg border border-gray-300 px-4 py-3 transition-all focus:border-blue-500 focus:ring-2 focus:ring-blue-200 focus:outline-none"
                     />
                   </div>
                   <div class="w-32">
                     <input
                       type="number"
                       placeholder="Monto"
-                      class="cost-amount w-full rounded-lg border border-gray-300 px-4 py-3 transition-all focus:border-primary-500 focus:ring-2 focus:ring-primary-200 focus:outline-none"
+                      class="cost-amount w-full rounded-lg border border-gray-300 px-4 py-3 transition-all focus:border-blue-500 focus:ring-2 focus:ring-blue-200 focus:outline-none"
                     />
                   </div>
                   <div class="flex items-center pt-3">
@@ -263,15 +186,14 @@
               <button
                 type="button"
                 id="add-cost-btn"
-                class="flex items-center gap-2 rounded-full bg-gradient-to-r from-blue-50 to-indigo-50 px-4 py-2.5 text-sm font-semibold text-primary-700 transition-all hover:from-blue-100 hover:to-indigo-100 shadow-sm border border-blue-200"
+                class="flex items-center gap-2 rounded-full bg-gradient-to-r from-blue-50 to-indigo-50 px-4 py-2.5 text-sm font-semibold text-blue-700 transition-all hover:from-blue-100 hover:to-indigo-100 shadow-sm border border-blue-200"
               >
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
                   <path fill-rule="evenodd" d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z" clip-rule="evenodd" />
                 </svg>
                 Agregar Costo
               </button>
-              
-              <div class="rounded-xl bg-gradient-to-r from-amber-50 to-yellow-50 p-5 border border-amber-200">
+              <div class="rounded-xl bg-gradient-to-r from-amber-50 to-yellow-100 p-5 border border-amber-200">
                 <div class="flex items-center justify-between">
                   <span class="font-semibold text-amber-800">
                     Total Costos Mensuales:
@@ -281,19 +203,13 @@
                   </span>
                 </div>
               </div>
-              
               <div class="flex flex-col sm:flex-row gap-3">
                 <button
                   type="button"
                   id="analyze-btn"
-                  class="flex-1 rounded-full bg-gradient-to-r from-accent-600 to-accent-700 px-6 py-3.5 text-sm font-semibold text-white shadow-lg transition-all hover:from-accent-700 hover:to-accent-800 hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-accent-500 focus:ring-offset-2"
+                  class="flex-1 rounded-full bg-gradient-to-r from-green-600 to-green-700 px-6 py-3.5 text-sm font-semibold text-white shadow-lg transition-all hover:from-green-700 hover:to-green-800 hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2"
                 >
-                  <div class="flex items-center justify-center gap-2">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                      <path fill-rule="evenodd" d="M12.316 3.051a1 1 0 01.633 1.265l-4 12a1 1 0 11-1.898-.632l4-12a1 1 0 011.265-.633zM5.707 6.293a1 1 0 010 1.414L3.414 10l2.293 2.293a1 1 0 11-1.414 1.414l-3-3a1 1 0 010-1.414l3-3a1 1 0 011.414 0zm8.586 0a1 1 0 011.414 0l3 3a1 1 0 010 1.414l-3 3a1 1 0 11-1.414-1.414L16.586 10l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd" />
-                    </svg>
-                    Analizar con IA
-                  </div>
+                  Analizar con IA
                 </button>
               </div>
             </div>
@@ -306,18 +222,16 @@
             <h2 class="mb-5 text-xl font-bold text-gray-800">
               Resultados de Análisis con IA
             </h2>
-            
             <div class="space-y-5 flex-1 overflow-y-auto">
-              <div class="rounded-xl bg-gradient-to-br from-blue-50 to-indigo-50 p-5 shadow-sm">
+              <div class="rounded-xl bg-gradient-to-br from-blue-50 to-indigo-100 p-5 shadow-sm">
                 <h3 class="mb-3 text-lg font-semibold text-blue-800">Resumen del Análisis</h3>
                 <p class="text-gray-700 leading-relaxed">
-                  Basado en los datos proporcionados, el análisis indica que tu cafetería tiene un potencial sólido para crecer. 
+                  Basado en los datos proporcionados, el análisis indica que tu cafetería tiene un potencial sólido para crecer.
                   Se recomienda enfocarse en la optimización de costos y la mejora de la experiencia del cliente.
                 </p>
               </div>
-              
               <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div class="rounded-xl bg-gradient-to-br from-green-50 to-emerald-50 p-5 shadow-sm border border-green-200">
+                <div class="rounded-xl bg-gradient-to-br from-green-50 to-emerald-100 p-5 shadow-sm border border-green-200">
                   <h4 class="mb-2 text-md font-semibold text-green-800 flex items-center gap-2">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
                       <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
@@ -335,8 +249,7 @@
                     </li>
                   </ul>
                 </div>
-                
-                <div class="rounded-xl bg-gradient-to-br from-amber-50 to-yellow-50 p-5 shadow-sm border border-amber-200">
+                <div class="rounded-xl bg-gradient-to-br from-amber-50 to-yellow-100 p-5 shadow-sm border border-amber-200">
                   <h4 class="mb-2 text-md font-semibold text-amber-800 flex items-center gap-2">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
                       <path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clip-rule="evenodd" />
@@ -355,9 +268,8 @@
                   </ul>
                 </div>
               </div>
-              
-              <div class="rounded-xl bg-gradient-to-br from-intelligence-50 to-orange-50 p-5 shadow-sm border border-intelligence-200">
-                <h4 class="mb-3 text-lg font-semibold text-intelligence-800 flex items-center gap-2">
+              <div class="rounded-xl bg-gradient-to-br from-orange-50 to-amber-100 p-5 shadow-sm border border-orange-200">
+                <h4 class="mb-3 text-lg font-semibold text-orange-800 flex items-center gap-2">
                   <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
                     <path d="M10 12a2 2 0 100-4 2 2 0 000 4z" />
                     <path fill-rule="evenodd" d="M.458 10C1.732 5.943 5.522 3 10 3s8.268 2.943 9.542 7c-1.274 4.057-5.064 7-9.542 7S1.732 14.057.458 10zM14 10a4 4 0 11-8 0 4 4 0 018 0z" clip-rule="evenodd" />
@@ -366,82 +278,21 @@
                 </h4>
                 <ul class="space-y-2">
                   <li class="flex items-start gap-3">
-                    <span class="flex-shrink-0 mt-1 w-6 h-6 rounded-full bg-intelligence-500 text-white text-xs flex items-center justify-center">1</span>
-                    <span class="text-intelligence-700">Implementar un programa de lealtad para clientes frecuentes.</span>
+                    <span class="flex-shrink-0 mt-1 w-6 h-6 rounded-full bg-orange-500 text-white text-xs flex items-center justify-center">1</span>
+                    <span class="text-orange-700">Implementar un programa de lealtad para clientes frecuentes.</span>
                   </li>
                   <li class="flex items-start gap-3">
-                    <span class="flex-shrink-0 mt-1 w-6 h-6 rounded-full bg-intelligence-500 text-white text-xs flex items-center justify-center">2</span>
-                    <span class="text-intelligence-700">Optimizar la compra de insumos buscando proveedores más competitivos.</span>
+                    <span class="flex-shrink-0 mt-1 w-6 h-6 rounded-full bg-orange-500 text-white text-xs flex items-center justify-center">2</span>
+                    <span class="text-orange-700">Optimizar la compra de insumos buscando proveedores más competitivos.</span>
                   </li>
                   <li class="flex items-start gap-3">
-                    <span class="flex-shrink-0 mt-1 w-6 h-6 rounded-full bg-intelligence-500 text-white text-xs flex items-center justify-center">3</span>
-                    <span class="text-intelligence-700">Crear contenido en redes sociales para atraer nuevos clientes.</span>
+                    <span class="flex-shrink-0 mt-1 w-6 h-6 rounded-full bg-orange-500 text-white text-xs flex items-center justify-center">3</span>
+                    <span class="text-orange-700">Crear contenido en redes sociales para atraer nuevos clientes.</span>
                   </li>
                 </ul>
               </div>
             </div>
           </div>
-        </div>
-
-      </div>
-    </div>
-  </div>
-
-  <!-- Modal -->
-  <div id="modal" class="fixed inset-0 z-50 hidden items-center justify-center bg-black bg-opacity-60 p-4">
-    <div class="max-h-[90vh] w-full max-w-md scale-100 overflow-y-auto rounded-2xl bg-white opacity-100 shadow-2xl transition-all">
-      <div class="p-6">
-        <div class="mb-5 flex items-center justify-between">
-          <h3 class="text-xl font-bold text-gray-800">
-            Análisis de la Cafetería
-          </h3>
-          <button id="close-modal-btn" class="text-2xl text-gray-500 hover:text-gray-700 transition-colors">
-            ×
-          </button>
-        </div>
-        <div class="mb-6">
-          <p class="mb-4 text-gray-700">
-            Análisis: <span id="modal-analysis" class="font-semibold text-primary-700">Sin datos</span>
-          </p>
-          <div class="rounded-xl bg-gradient-to-br from-blue-50 to-indigo-50 p-5 border border-blue-200">
-            <h4 class="mb-3 font-semibold text-blue-800 flex items-center gap-2">
-              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd" />
-              </svg>
-              Recomendaciones:
-            </h4>
-            <ul class="space-y-2">
-              <li class="flex items-start gap-2">
-                <span class="text-blue-500 mt-1">•</span>
-                <span class="text-blue-700">Optimizar costos de insumos buscando proveedores alternativos</span>
-              </li>
-              <li class="flex items-start gap-2">
-                <span class="text-blue-500 mt-1">•</span>
-                <span class="text-blue-700">Mejorar estrategia de precios analizando la competencia local</span>
-              </li>
-              <li class="flex items-start gap-2">
-                <span class="text-blue-500 mt-1">•</span>
-                <span class="text-blue-700">Aumentar clientes frecuentes con un programa de lealtad</span>
-              </li>
-            </ul>
-          </div>
-          <div class="mt-5 rounded-xl bg-gradient-to-br from-amber-50 to-yellow-50 p-5 border border-amber-200">
-            <h4 class="mb-3 font-semibold text-amber-800 flex items-center gap-2">
-              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                <path d="M10 12a2 2 0 100-4 2 2 0 000 4z" />
-                <path fill-rule="evenodd" d="M.458 10C1.732 5.943 5.522 3 10 3s8.268 2.943 9.542 7c-1.274 4.057-5.064 7-9.542 7S1.732 14.057.458 10zM14 10a4 4 0 11-8 0 4 4 0 018 0z" clip-rule="evenodd" />
-              </svg>
-              Resumen:
-            </h4>
-            <p class="text-amber-700">
-              Basado en el análisis, se recomienda enfocarse en la optimización de costos y la mejora de la experiencia del cliente para aumentar la rentabilidad.
-            </p>
-          </div>
-        </div>
-        <div class="flex justify-end">
-          <button id="close-modal-btn-2" class="rounded-full bg-gradient-to-r from-primary-600 to-primary-700 px-6 py-2.5 font-semibold text-white shadow-md transition-all hover:from-primary-700 hover:to-primary-800 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2">
-            Cerrar
-          </button>
         </div>
       </div>
     </div>
@@ -449,14 +300,16 @@
 
   <script>
     let activeSection = 'info';
-    let costItemIdCounter = 2;
-
+    
     function switchSection(sectionId) {
+      // Ocultar la sección actual
       document.getElementById(`section-${activeSection}`).classList.remove('active');
+      // Mostrar la nueva sección
       document.getElementById(`section-${sectionId}`).classList.add('active');
+      // Actualizar la sección activa
       activeSection = sectionId;
       
-      // Update navigation buttons
+      // Actualizar botones de navegación
       document.querySelectorAll('.nav-button').forEach(btn => {
         btn.classList.remove('active');
       });
@@ -469,15 +322,13 @@
         document.getElementById('btn-intelligence').classList.add('active');
       }
     }
-
+    
     // Fixed Costs Functionality
     const container = document.getElementById('cost-items-container');
     const addItemButton = document.getElementById('add-cost-btn');
     const analyzeButton = document.getElementById('analyze-btn');
-    const modal = document.getElementById('modal');
-    const closeModalButtons = document.querySelectorAll('#close-modal-btn, #close-modal-btn-2');
     const totalCostElement = document.getElementById('total-cost');
-
+    
     function createCostItem() {
       const newItem = document.createElement('div');
       newItem.className = 'cost-item flex gap-3 items-start';
@@ -486,14 +337,14 @@
           <input
             type="text"
             placeholder="Nombre del costo (ej: Alquiler)"
-            class="cost-name w-full rounded-lg border border-gray-300 px-4 py-3 transition-all focus:border-primary-500 focus:ring-2 focus:ring-primary-200 focus:outline-none"
+            class="cost-name w-full rounded-lg border border-gray-300 px-4 py-3 transition-all focus:border-blue-500 focus:ring-2 focus:ring-blue-200 focus:outline-none"
           />
         </div>
         <div class="w-32">
           <input
             type="number"
             placeholder="Monto"
-            class="cost-amount w-full rounded-lg border border-gray-300 px-4 py-3 transition-all focus:border-primary-500 focus:ring-2 focus:ring-primary-200 focus:outline-none"
+            class="cost-amount w-full rounded-lg border border-gray-300 px-4 py-3 transition-all focus:border-blue-500 focus:ring-2 focus:ring-blue-200 focus:outline-none"
           />
         </div>
         <div class="flex items-center pt-3">
@@ -509,14 +360,14 @@
       `;
       return newItem;
     }
-
+    
     addItemButton.addEventListener('click', () => {
        const newItem = createCostItem();
        container.appendChild(newItem);
        attachRemoveListener(newItem);
        updateTotalCost();
     });
-
+    
     function attachRemoveListener(itemElement) {
        const removeButton = itemElement.querySelector('.remove-item');
        removeButton.addEventListener('click', () => {
@@ -528,7 +379,7 @@
     }
     
     attachRemoveListener(container.querySelector('.cost-item'));
-
+    
     function updateTotalCost() {
         let total = 0;
         document.querySelectorAll('.cost-item').forEach(item => {
@@ -538,35 +389,17 @@
         });
         totalCostElement.textContent = `$${total.toFixed(2)}`;
     }
-
+    
     container.addEventListener('input', (e) => {
         if (e.target.classList.contains('cost-amount')) {
             updateTotalCost();
         }
     });
-
-    // Modal
+    
+    // Cambiar a la sección de resultados IA
     analyzeButton.addEventListener('click', () => {
-        const cafeName = document.getElementById('cafe-name').value || 'Sin nombre';
-        document.getElementById('modal-analysis').textContent = `Análisis para "${cafeName}"`;
-        modal.classList.remove('hidden');
-        modal.classList.add('flex');
+        switchSection('intelligence');
     });
-
-    closeModalButtons.forEach(button => {
-        button.addEventListener('click', () => {
-            modal.classList.add('hidden');
-            modal.classList.remove('flex');
-        });
-    });
-
-    modal.addEventListener('click', (e) => {
-        if (e.target === modal) {
-            modal.classList.add('hidden');
-            modal.classList.remove('flex');
-        }
-    });
-
   </script>
 </body>
 </html>
